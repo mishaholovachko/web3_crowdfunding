@@ -1,21 +1,21 @@
 import React, { createContext, FC, useContext } from 'react';
-import { useAddress, useConnect, useContract, useContractWrite, useMetamask } from '@thirdweb-dev/react';
+import { useAddress, useConnect, useContract, useContractWrite } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
 
-interface Campaign {
+export interface Campaign {
+  amountCollected: string;
+  description: string;
+  deadline: number;
+  target: string;
   owner: string;
   title: string;
-  description: string;
-  target: string;
-  deadline: number;
-  amountCollected: string;
   image: string;
   pId: number;
 }
 
-interface Donation {
-  donator: string;
+export interface Donation {
   donation: string;
+  donator: string;
 }
 
 interface StateContextType {
@@ -35,9 +35,8 @@ interface StateContextProviderProps {
   children: React.ReactNode;
 }
 
-export const StateContextProvider: FC<StateContextProviderProps> = ({ children }) => {
+export const StateContextProvider = ({ children }: StateContextProviderProps) => {
   const { contract } = useContract('0xFF83e9A8F4A94B6102fF0c5CbadD6f8E564B61C7') ?? {};
-  console.log('contract:', contract)
   const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign');
 
   const address = useAddress();
@@ -64,6 +63,7 @@ export const StateContextProvider: FC<StateContextProviderProps> = ({ children }
 
   const getCampaigns = async () => {
     const campaigns = await contract?.call('getCampaigns') ?? [];
+    console.log('campaigns:', campaigns)
 
     const parsedCampaigns = campaigns.map((campaign: any, i: number) => ({
       owner: campaign.owner,

@@ -1,10 +1,7 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { Sidebar } from './components';
-import Navbar from './components/Navbar';
-import CreateCampaign from './pages/CreateCampaign';
-// import { CampaignDetails, CreateCampaign, Home, Profile } from './pages';
+import { CampaignDetails, CreateCampaign, Home, Profile } from './pages';
+import { Navbar, Sidebar } from './components';
 
 const App = () => {
     return (
@@ -15,9 +12,11 @@ const App = () => {
 
             <div className="flex-1 max-sm:w-full max-w-[1280px] mx-auto sm:pr-5">
                 <Navbar />
-
                 <Routes>
+                    <Route path="/campaign-details/:id" element={<CampaignDetails />} />
                     <Route path="/create-campaign" element={<CreateCampaign />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/" element={<Home />} />
                 </Routes>
             </div>
         </div>

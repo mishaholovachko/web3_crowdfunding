@@ -7,7 +7,7 @@ import { CustomButton, FormField, Loader } from '../components';
 import { checkIfImage } from '../utils';
 import { useStateContext } from '../context';
 
-const CreateCampaign: React.FC = () => {
+const CreateCampaign = () => {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { createCampaign } = useStateContext() || {};
