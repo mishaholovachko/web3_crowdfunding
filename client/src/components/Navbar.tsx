@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useStateContext } from '../context';
 import { CustomButton } from '.';
-import { logo, menu, search, thirdweb } from '../assets';
-import { navlinks } from '../constants';
+import { logo, menu, search, profile } from '../assets';
+import { ConnectWalletBtnProps, navlinks } from '../constants';
 import { ConnectWallet } from '@thirdweb-dev/react';
 
 const Navbar = () => {
@@ -24,21 +24,18 @@ const Navbar = () => {
       </div>
 
       <div className="sm:flex hidden flex-row justify-end gap-4">
-        <CustomButton
+        {address && <CustomButton
+          handleClick={() => navigate('create-campaign')}
+          title={'Create a campaign'}
+          styles='bg-[#1dc071]'
           btnType="button"
-          title={address ? 'Create a campaign' : 'Connect'}
-          styles={address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'}
-          handleClick={() => {
-            if (address) navigate('create-campaign')
-            else connect()
-          }}
-        />
+        />}
 
-        <ConnectWallet theme='dark' />
+        {!address && <ConnectWallet theme={ConnectWalletBtnProps} />}
 
         <Link to="/profile">
           <div className="w-[52px] h-[52px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
-            <img src={thirdweb} alt="user" className="w-[60%] h-[60%] object-contain" />
+            <img src={profile} alt="user" className="w-[60%] h-[60%] object-contain" />
           </div>
         </Link>
       </div>

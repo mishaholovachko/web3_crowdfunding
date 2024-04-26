@@ -1,4 +1,4 @@
-import React, { createContext, FC, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 import { useAddress, useConnect, useContract, useContractWrite } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
 
@@ -63,7 +63,6 @@ export const StateContextProvider = ({ children }: StateContextProviderProps) =>
 
   const getCampaigns = async () => {
     const campaigns = await contract?.call('getCampaigns') ?? [];
-    console.log('campaigns:', campaigns)
 
     const parsedCampaigns = campaigns.map((campaign: any, i: number) => ({
       owner: campaign.owner,

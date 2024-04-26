@@ -25,7 +25,7 @@ const Icon: React.FC<IconProps> = ({ styles, name, imgUrl, isActive, disabled, h
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate();
-  const [isActive, setIsActive] = useState<string>('dashboard');
+  const [isActive, setIsActive] = useState('dashboard');
 
   return (
     <div className="flex justify-between items-center flex-col sticky top-5 h-[93vh]">
